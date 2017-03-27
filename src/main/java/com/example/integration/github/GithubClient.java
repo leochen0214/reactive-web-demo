@@ -56,7 +56,7 @@ public class GithubClient {
         .uri("https://api.github.com/repos/{owner}/{repo}/issues?state=open", owner, repo)
         .accept(VND_GITHUB_V3)
         .exchange()
-        .flatMap(response -> response.bodyToFlux(GithubIssue.class)).log();
+        .flatMap(response -> response.bodyToFlux(GithubIssue.class));
   }
 
 

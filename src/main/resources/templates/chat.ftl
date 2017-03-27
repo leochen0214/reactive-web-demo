@@ -44,26 +44,25 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="/issues">Issues</a></li>
-                <li><a href="/chat">Chat</a></li>
+                <li><a href="/chat" class="active">Chat</a></li>
+
             </ul>
+
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
 
-<div class="container">
+<div class="container wrapper">
 
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1>Reactor</h1>
-        <p>
-            Reactor is a fourth-generation Reactive library for building non-blocking applications
-            on
-            the JVM based on the Reactive Streams Specification
-        </p>
-        <p>
-            <a class="btn btn-lg btn-primary" href="https://projectreactor.io/" role="button">Reactor Project &raquo;</a>
-        </p>
+    <div class="panel panel-default">
+       <div class="panel-heading">
+           <h3 class="panel-title">#reactor on gitter</h3>
+       </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal" id="chat-messages"></dl>
+        </div>
     </div>
 
 </div> <!-- /container -->
@@ -74,5 +73,28 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var appendMessages = function (message) {
+            var chatZone = $("#chat-messages");
+            chatZone.append("<dt>" + message.fromUser.displayName + "</dt>");
+            chatZone.append("<dd>" + message.text + "</dd>");
+        };
+
+        $.ajax("/chatMessages")
+                .done(function (messages) {
+                    messages.forEach(function (msg) {
+                        appendMessages(msg);
+                    });
+                });
+
+        //SSE
+        var chatEventSource = new EventSource("/chatStream");
+        chatEventSource.onmessage = function (e) {
+            appendMessages(JSON.parse(e.data));
+        };
+
+    });
+</script>
 </body>
 </html>

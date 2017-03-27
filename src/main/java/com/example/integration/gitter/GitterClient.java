@@ -69,7 +69,7 @@ public class GitterClient {
         .accept(MediaType.APPLICATION_JSON)
         .contentType(MediaType.APPLICATION_JSON)
         .exchange()
-        .flatMap(response -> response.bodyToFlux(GitterMessage.class)).log();
+        .flatMap(response -> response.bodyToFlux(GitterMessage.class));
   }
 
 

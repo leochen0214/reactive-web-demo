@@ -42,29 +42,53 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/issues">Issues</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/issues" class="active">Issues</a></li>
                 <li><a href="/chat">Chat</a></li>
+
             </ul>
+
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
 
-<div class="container">
+<div class="container wrapper">
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>title</th>
+                <th>state</th>
+                <th>online</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <#list issues as item>
+            <tr>
+                <td>${item.issue.number}</td>
+                <td>${item.issue.title}</td>
+                <td>${item.issue.state}</td>
+                <td>
+                    <#if item.online>
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                    <#else >
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </#if>
+                </td>
+            </tr>
+            </#list>
+
+
+            </tbody>
+        </table>
+    </div>
+
 
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1>Reactor</h1>
-        <p>
-            Reactor is a fourth-generation Reactive library for building non-blocking applications
-            on
-            the JVM based on the Reactive Streams Specification
-        </p>
-        <p>
-            <a class="btn btn-lg btn-primary" href="https://projectreactor.io/" role="button">Reactor Project &raquo;</a>
-        </p>
-    </div>
 
 </div> <!-- /container -->
 
