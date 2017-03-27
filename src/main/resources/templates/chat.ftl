@@ -44,7 +44,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="/issues">Issues</a></li>
-                <li><a href="/chat" class="active">Chat</a></li>
+                <li class="active"><a href="/chat">Chat</a></li>
 
             </ul>
 

@@ -43,7 +43,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="/issues" class="active">Issues</a></li>
+                <li class="active"><a href="/issues">Issues</a></li>
                 <li><a href="/chat">Chat</a></li>
 
             </ul>
@@ -62,6 +62,7 @@
                 <th>#</th>
                 <th>title</th>
                 <th>state</th>
+                <th>createdBy</th>
                 <th>online</th>
             </tr>
             </thead>
@@ -72,6 +73,7 @@
                 <td>${item.issue.number}</td>
                 <td>${item.issue.title}</td>
                 <td>${item.issue.state}</td>
+                <td>${item.issue.user.login}</td>
                 <td>
                     <#if item.online>
                         <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
