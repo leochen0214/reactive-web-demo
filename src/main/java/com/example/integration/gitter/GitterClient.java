@@ -2,6 +2,7 @@ package com.example.integration.gitter;
 
 import com.example.DashboardProperties;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
@@ -58,7 +59,8 @@ public class GitterClient {
     return webClient.get()
         .uri("/v1/rooms/{roomId}/users?q={username}", roomId, username)
         .accept(MediaType.APPLICATION_JSON)
-        .contentType(MediaType.APPLICATION_JSON)
+        .header(HttpHeaders.CONTENT_TYPE,MediaType.APPLICATION_JSON_VALUE )
+//        .contentType(MediaType.APPLICATION_JSON)
         .exchange()
         .then(response -> response.bodyToMono(GitterUser.class));
   }
@@ -67,7 +69,7 @@ public class GitterClient {
     return webClient.get()
         .uri("/v1/rooms/{roomId}/chatMessages?limit={limit}", roomId, limit)
         .accept(MediaType.APPLICATION_JSON)
-        .contentType(MediaType.APPLICATION_JSON)
+        .header(HttpHeaders.CONTENT_TYPE,MediaType.APPLICATION_JSON_VALUE )
         .exchange()
         .flatMap(response -> response.bodyToFlux(GitterMessage.class));
   }
